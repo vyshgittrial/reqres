@@ -1,0 +1,37 @@
+name: Run ReqRes API Tests (Newman)
+
+on:
+  push:
+    paths:
+      - "collections/reqres.postman_collection.json"
+      - ".github/workflows/run-reqres-newman.yml"
+  workflow_dispatch:
+
+jobs:
+  newman-reqres:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run ReqRes collection with Newman
+        env:
+          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+        run: |
+          mkdir -p results
+          npx newman run collections/reqres.postman_collection.json \
+            --env-var "api_key=$REQRES_API_KEY" \
+            --reporters cli,junit \
+            --reporter-junit-export results/reqres-report.xml
+
+      - name: Upload JUnit test report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reqres-junit-report
+          path: results/reqres-report.xml
