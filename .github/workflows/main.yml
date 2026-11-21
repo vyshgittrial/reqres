@@ -1,0 +1,67 @@
+name: Sync ReqRes Collection to GitHub
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-reqres:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch and unwrap latest ReqRes collection
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+          REQRES_UID: ${{ secrets.REQRES_UID }}
+        run: |
+          mkdir -p collections
+          node -e '
+          const fs = require("fs");
+          const apiKey = process.env.POSTMAN_API_KEY;
+          const uid = process.env.REQRES_UID;
+          const out = "collections/reqres.postman_collection.json";
+
+          (async () => {
+            if (!apiKey) {
+              throw new Error("Missing POSTMAN_API_KEY secret");
+            }
+            if (!uid) {
+              throw new Error("Missing REQRES_UID secret");
+            }
+
+            const res = await fetch(`https://api.getpostman.com/collections/${uid}`, {
+              headers: { "X-Api-Key": apiKey }
+            });
+            if (!res.ok) {
+              throw new Error(`Failed to fetch ${out}: HTTP ${res.status}`);
+            }
+
+            const data = await res.json();
+            if (!data.collection) {
+              throw new Error(`Missing .collection wrapper for ${out}`);
+            }
+
+            fs.writeFileSync(out, JSON.stringify(data.collection, null, 2) + "\n", "utf8");
+          })().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+          '
+
+      - name: Commit and push if ReqRes collection changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add collections/reqres.postman_collection.json
+          if git diff --staged --quiet; then
+            echo "No ReqRes collection changes detected."
+          else
+            git commit -m "chore: sync latest ReqRes Postman collection"
+            git push
+          fi
