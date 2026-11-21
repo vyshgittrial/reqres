@@ -5,7 +5,7 @@
     "description": "create random data on every request\n\n[https://www.gorest.co.in/reference/users](https://www.gorest.co.in/reference/users)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "createdAt": "2026-11-18T17:11:09.000Z",
-    "updatedAt": "2026-11-21T02:27:47.000Z",
+    "updatedAt": "2026-11-21T03:08:09.000Z",
     "lastUpdatedBy": "60261046",
     "uid": "60261046-de66edef-d119-4339-a71a-cdb8c34e801d"
   },
@@ -300,8 +300,8 @@
           "script": {
             "id": "c8ccf700-7864-4dba-ad4e-96cc80d72dca",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
+              "pm.test(\"Status code is 204\", function () {\r",
+              "    pm.response.to.have.status(204);\r",
               "});\r",
               "pm.test(\"response time is less than 1000ms\", function () {\r",
               "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
@@ -337,19 +337,19 @@
           }
         },
         "url": {
-          "raw": "{{baseURL}}/users/01a1f787-a45a-789c-a803-f6fd3053cf37",
+          "raw": "{{baseURL}}/users/{{id}}",
           "host": [
             "{{baseURL}}"
           ],
           "path": [
             "users",
-            "01a1f787-a45a-789c-a803-f6fd3053cf37"
+            "{{id}}"
           ]
         }
       },
       "response": [],
       "createdAt": "2026-11-21T02:25:04.000Z",
-      "updatedAt": "2026-11-21T02:26:47.000Z",
+      "updatedAt": "2026-11-21T02:59:15.000Z",
       "uid": "60261046-d1f7b524-533d-4fae-b279-670820d85abf"
     }
   ],
