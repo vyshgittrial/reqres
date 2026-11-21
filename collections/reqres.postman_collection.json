@@ -5,7 +5,7 @@
     "description": "create random data on every request\n\n[https://www.gorest.co.in/reference/users](https://www.gorest.co.in/reference/users)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "createdAt": "2026-11-18T17:11:09.000Z",
-    "updatedAt": "2026-11-20T01:25:40.000Z",
+    "updatedAt": "2026-11-21T02:27:47.000Z",
     "lastUpdatedBy": "60261046",
     "uid": "60261046-de66edef-d119-4339-a71a-cdb8c34e801d"
   },
@@ -19,7 +19,7 @@
             "id": "756c4acf-40c7-4668-8650-9715f3d6df4a",
             "exec": [
               "pm.collectionVariables.set(\"baseURL\", \"https://gorest.co.in/public/v3\");\r",
-              "pm.collectionVariables.set(\"token\", \"gorest_I5oBDoAryRBWzNCalqvbgRYvzDUayXTy5QKaDouvLEL2PVBZ8\");\r",
+              "pm.collectionVariables.set(\"token\", \"gorest_6fByK40Nvz8MmhWcdOhIrohdEUypPJcCD4LZ4pcshFY1tu7Cc\");\r",
               "// Generate a random number suffix to ensure uniqueness\r",
               "const randomSuffix = Math.floor(Math.random() * 100000);\r",
               "\r",
@@ -120,7 +120,7 @@
       },
       "response": [],
       "createdAt": "2026-11-18T17:11:14.000Z",
-      "updatedAt": "2026-11-20T01:24:53.000Z",
+      "updatedAt": "2026-11-21T02:07:59.000Z",
       "uid": "60261046-9683ba02-8b4c-4167-8ce9-1af0720f130e"
     },
     {
@@ -191,7 +191,7 @@
       },
       "response": [],
       "createdAt": "2026-11-18T18:00:31.000Z",
-      "updatedAt": "2026-11-20T01:26:08.000Z",
+      "updatedAt": "2026-11-21T02:20:59.000Z",
       "uid": "60261046-ff2203d3-5a5c-4086-aec9-91440a634459"
     },
     {
@@ -200,9 +200,10 @@
         {
           "listen": "prerequest",
           "script": {
-            "id": "f72966ab-38c9-4924-85c2-187ed9d4c36f",
+            "id": "756c4acf-40c7-4668-8650-9715f3d6df4a",
             "exec": [
               "pm.collectionVariables.set(\"baseURL\", \"https://gorest.co.in/public/v3\");\r",
+              "pm.collectionVariables.set(\"token\", \"gorest_6fByK40Nvz8MmhWcdOhIrohdEUypPJcCD4LZ4pcshFY1tu7Cc\");\r",
               "// Generate a random number suffix to ensure uniqueness\r",
               "const randomSuffix = Math.floor(Math.random() * 100000);\r",
               "\r",
@@ -226,14 +227,13 @@
         {
           "listen": "test",
           "script": {
-            "id": "a530aa28-e852-4fef-9f0b-7edc1bab676c",
+            "id": "c8ccf700-7864-4dba-ad4e-96cc80d72dca",
             "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
+              "\r",
               "pm.test(\"response time is less than 1000ms\", function () {\r",
               "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
-              "});"
+              "});\r",
+              ""
             ],
             "type": "text/javascript",
             "packages": {},
@@ -241,7 +241,7 @@
           }
         }
       ],
-      "id": "972596a2-43df-4b3a-9750-d21c23ab118e",
+      "id": "92eebdf6-0678-4561-8da5-4cd604f4c718",
       "request": {
         "auth": {
           "type": "bearer",
@@ -257,7 +257,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"name\": \"vyshali\",\r\n    \"email\": \"vyshali.k123@rest.co.in\",\r\n    \"status\": \"active\"\r\n}",
+          "raw": "{\r\n    \"name\": \"code53904@rest.co.in\",\r\n    \"email\": \"o53904\",\r\n    \"status\": \"active\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -265,20 +265,92 @@
           }
         },
         "url": {
-          "raw": "{{baseURL}}/users/01a1efc7-97b2-7fa3-9bc8-bd8ff75b7efc",
+          "raw": "{{baseURL}}/users/01a1f787-a45a-789c-a803-f6fd3053cf37",
           "host": [
             "{{baseURL}}"
           ],
           "path": [
             "users",
-            "01a1efc7-97b2-7fa3-9bc8-bd8ff75b7efc"
+            "01a1f787-a45a-789c-a803-f6fd3053cf37"
           ]
         }
       },
       "response": [],
-      "createdAt": "2026-11-18T18:01:52.000Z",
-      "updatedAt": "2026-11-20T01:26:28.000Z",
-      "uid": "60261046-972596a2-43df-4b3a-9750-d21c23ab118e"
+      "createdAt": "2026-11-21T02:20:47.000Z",
+      "updatedAt": "2026-11-21T02:24:41.000Z",
+      "uid": "60261046-92eebdf6-0678-4561-8da5-4cd604f4c718"
+    },
+    {
+      "name": "delete",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "756c4acf-40c7-4668-8650-9715f3d6df4a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "c8ccf700-7864-4dba-ad4e-96cc80d72dca",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "d1f7b524-533d-4fae-b279-670820d85abf",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/users/01a1f787-a45a-789c-a803-f6fd3053cf37",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "users",
+            "01a1f787-a45a-789c-a803-f6fd3053cf37"
+          ]
+        }
+      },
+      "response": [],
+      "createdAt": "2026-11-21T02:25:04.000Z",
+      "updatedAt": "2026-11-21T02:26:47.000Z",
+      "uid": "60261046-d1f7b524-533d-4fae-b279-670820d85abf"
     }
   ],
   "variable": [
