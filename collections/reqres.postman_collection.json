@@ -1,0 +1,314 @@
+{
+  "info": {
+    "_postman_id": "de66edef-d119-4339-a71a-cdb8c34e801d",
+    "name": "reqres",
+    "description": "create random data on every request\n\n[https://www.gorest.co.in/reference/users](https://www.gorest.co.in/reference/users)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-11-18T17:11:09.000Z",
+    "updatedAt": "2026-11-20T01:25:40.000Z",
+    "lastUpdatedBy": "60261046",
+    "uid": "60261046-de66edef-d119-4339-a71a-cdb8c34e801d"
+  },
+  "item": [
+    {
+      "name": "Createusersrandom",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "756c4acf-40c7-4668-8650-9715f3d6df4a",
+            "exec": [
+              "pm.collectionVariables.set(\"baseURL\", \"https://gorest.co.in/public/v3\");\r",
+              "pm.collectionVariables.set(\"token\", \"gorest_I5oBDoAryRBWzNCalqvbgRYvzDUayXTy5QKaDouvLEL2PVBZ8\");\r",
+              "// Generate a random number suffix to ensure uniqueness\r",
+              "const randomSuffix = Math.floor(Math.random() * 100000);\r",
+              "\r",
+              "// Define your desired prefixes\r",
+              "const namePrefix = \"do\";\r",
+              "const emailPrefix = \"code\";\r",
+              "\r",
+              "// Combine the prefix with the random suffix\r",
+              "const finalName = namePrefix + randomSuffix;\r",
+              "const finalEmail = emailPrefix + randomSuffix + \"@rest.co.in\";\r",
+              "\r",
+              "// Save them as collection variables\r",
+              "pm.collectionVariables.set(\"random_name\", finalName);\r",
+              "pm.collectionVariables.set(\"random_email\", finalEmail);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "c8ccf700-7864-4dba-ad4e-96cc80d72dca",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "pm.test(\"response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});\r",
+              "var responseJson = pm.response.json();\r",
+              "const schema = {\r",
+              "  type: \"object\",\r",
+              "  properties: {\r",
+              "    created_at: { type: \"string\" },\r",
+              "    email: { type: \"string\", format: \"email\" },\r",
+              "    id: { type: \"string\" },\r",
+              "    name: { type: \"string\" },\r",
+              "    read_only: { type: \"boolean\" },\r",
+              "    status: { type: \"string\" },\r",
+              "    updated_at: { type: \"string\" }\r",
+              "  },\r",
+              "  required: [\r",
+              "    \"created_at\",\r",
+              "    \"email\",\r",
+              "    \"id\",\r",
+              "    \"name\",\r",
+              "    \"read_only\",\r",
+              "    \"status\",\r",
+              "    \"updated_at\"\r",
+              "  ],\r",
+              "  additionalProperties: false\r",
+              "};\r",
+              "\r",
+              "pm.test(\"Response matches user schema\", function () {\r",
+              "  pm.response.to.have.jsonSchema(schema);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "9683ba02-8b4c-4167-8ce9-1af0720f130e",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"{{random_name}}\",\r\n    \"email\": \"{{random_email}}\",\r\n    \"status\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/users",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": [],
+      "createdAt": "2026-11-18T17:11:14.000Z",
+      "updatedAt": "2026-11-20T01:24:53.000Z",
+      "uid": "60261046-9683ba02-8b4c-4167-8ce9-1af0720f130e"
+    },
+    {
+      "name": "getusers",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "751d7198-a830-4b46-8a40-df70ea466f3a",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "b494e979-42f9-43ad-af3c-ebd6174da4c9",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "ff2203d3-5a5c-4086-aec9-91440a634459",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/users",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": [],
+      "createdAt": "2026-11-18T18:00:31.000Z",
+      "updatedAt": "2026-11-20T01:26:08.000Z",
+      "uid": "60261046-ff2203d3-5a5c-4086-aec9-91440a634459"
+    },
+    {
+      "name": "patch",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "f72966ab-38c9-4924-85c2-187ed9d4c36f",
+            "exec": [
+              "pm.collectionVariables.set(\"baseURL\", \"https://gorest.co.in/public/v3\");\r",
+              "// Generate a random number suffix to ensure uniqueness\r",
+              "const randomSuffix = Math.floor(Math.random() * 100000);\r",
+              "\r",
+              "// Define your desired prefixes\r",
+              "const namePrefix = \"do\";\r",
+              "const emailPrefix = \"code\";\r",
+              "\r",
+              "// Combine the prefix with the random suffix\r",
+              "const finalName = namePrefix + randomSuffix;\r",
+              "const finalEmail = emailPrefix + randomSuffix + \"@rest.co.in\";\r",
+              "\r",
+              "// Save them as collection variables\r",
+              "pm.collectionVariables.set(\"random_name\", finalName);\r",
+              "pm.collectionVariables.set(\"random_email\", finalEmail);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "a530aa28-e852-4fef-9f0b-7edc1bab676c",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "pm.test(\"response time is less than 1000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "972596a2-43df-4b3a-9750-d21c23ab118e",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"vyshali\",\r\n    \"email\": \"vyshali.k123@rest.co.in\",\r\n    \"status\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/users/01a1efc7-97b2-7fa3-9bc8-bd8ff75b7efc",
+          "host": [
+            "{{baseURL}}"
+          ],
+          "path": [
+            "users",
+            "01a1efc7-97b2-7fa3-9bc8-bd8ff75b7efc"
+          ]
+        }
+      },
+      "response": [],
+      "createdAt": "2026-11-18T18:01:52.000Z",
+      "updatedAt": "2026-11-20T01:26:28.000Z",
+      "uid": "60261046-972596a2-43df-4b3a-9750-d21c23ab118e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": ""
+    },
+    {
+      "key": "random_name",
+      "value": ""
+    },
+    {
+      "key": "random_email",
+      "value": ""
+    },
+    {
+      "key": "auth_secret_00ha",
+      "secret": true,
+      "source": {
+        "provider": "postman",
+        "postman": {
+          "type": "cloud",
+          "secretId": "0213e5f8-726e-40a8-9668-c4eb38ead6b0",
+          "vaultId": "60f5e82b-bc97-4b83-baa2-3fa07e754811"
+        }
+      }
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
