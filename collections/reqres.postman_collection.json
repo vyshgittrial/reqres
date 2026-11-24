@@ -5,7 +5,7 @@
     "description": "create random data on every request\n\n[https://www.gorest.co.in/reference/users](https://www.gorest.co.in/reference/users)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "createdAt": "2026-11-18T17:11:09.000Z",
-    "updatedAt": "2026-11-21T03:08:09.000Z",
+    "updatedAt": "2026-11-24T18:17:22.000Z",
     "lastUpdatedBy": "60261046",
     "uid": "60261046-de66edef-d119-4339-a71a-cdb8c34e801d"
   },
@@ -19,7 +19,7 @@
             "id": "756c4acf-40c7-4668-8650-9715f3d6df4a",
             "exec": [
               "pm.collectionVariables.set(\"baseURL\", \"https://gorest.co.in/public/v3\");\r",
-              "pm.collectionVariables.set(\"token\", \"gorest_6fByK40Nvz8MmhWcdOhIrohdEUypPJcCD4LZ4pcshFY1tu7Cc\");\r",
+              "pm.collectionVariables.set(\"token\", \"gorest_uKifQSB42sngHytbWJQ4ISgGftkeWJ3XSduesMqIehM3ZOZPd\");\r",
               "// Generate a random number suffix to ensure uniqueness\r",
               "const randomSuffix = Math.floor(Math.random() * 100000);\r",
               "\r",
@@ -120,7 +120,7 @@
       },
       "response": [],
       "createdAt": "2026-11-18T17:11:14.000Z",
-      "updatedAt": "2026-11-21T02:07:59.000Z",
+      "updatedAt": "2026-11-24T18:16:13.000Z",
       "uid": "60261046-9683ba02-8b4c-4167-8ce9-1af0720f130e"
     },
     {
