@@ -5,7 +5,7 @@
     "description": "create random data on every request\n\n[https://www.gorest.co.in/reference/users](https://www.gorest.co.in/reference/users)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "createdAt": "2026-11-18T17:11:09.000Z",
-    "updatedAt": "2026-11-24T18:17:22.000Z",
+    "updatedAt": "2026-11-24T18:30:13.000Z",
     "lastUpdatedBy": "60261046",
     "uid": "60261046-de66edef-d119-4339-a71a-cdb8c34e801d"
   },
@@ -19,7 +19,7 @@
             "id": "756c4acf-40c7-4668-8650-9715f3d6df4a",
             "exec": [
               "pm.collectionVariables.set(\"baseURL\", \"https://gorest.co.in/public/v3\");\r",
-              "pm.collectionVariables.set(\"token\", \"gorest_uKifQSB42sngHytbWJQ4ISgGftkeWJ3XSduesMqIehM3ZOZPd\");\r",
+              "pm.collectionVariables.set(\"token\", \"gorest_8MzzKdG8TQD8xKYCidZi0LWAaU2FLkH0uRRxX94GmPQ0YTk42\");\r",
               "// Generate a random number suffix to ensure uniqueness\r",
               "const randomSuffix = Math.floor(Math.random() * 100000);\r",
               "\r",
@@ -77,7 +77,8 @@
               "\r",
               "pm.test(\"Response matches user schema\", function () {\r",
               "  pm.response.to.have.jsonSchema(schema);\r",
-              "});"
+              "});\r",
+              "pm.collectionVariables.set(\"userId\", responseJson.id);"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -120,7 +121,7 @@
       },
       "response": [],
       "createdAt": "2026-11-18T17:11:14.000Z",
-      "updatedAt": "2026-11-24T18:16:13.000Z",
+      "updatedAt": "2026-11-24T18:24:58.000Z",
       "uid": "60261046-9683ba02-8b4c-4167-8ce9-1af0720f130e"
     },
     {
@@ -233,6 +234,11 @@
               "pm.test(\"response time is less than 1000ms\", function () {\r",
               "    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
               "});\r",
+              "\r",
+              "pm.test(\"status code is 200\", function () {\r",
+              "    pm.expect(pm.response.code).to.eql(200);\r",
+              "});\r",
+              "\r",
               ""
             ],
             "type": "text/javascript",
@@ -257,7 +263,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"name\": \"code53904@rest.co.in\",\r\n    \"email\": \"o53904\",\r\n    \"status\": \"active\"\r\n}",
+          "raw": "{\r\n    \"name\": \"d025363\",\r\n    \"email\": \"code3904@rest.co.in\",\r\n    \"status\": \"active\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -265,19 +271,19 @@
           }
         },
         "url": {
-          "raw": "{{baseURL}}/users/01a1f787-a45a-789c-a803-f6fd3053cf37",
+          "raw": "{{baseURL}}/users/{{userId}}",
           "host": [
             "{{baseURL}}"
           ],
           "path": [
             "users",
-            "01a1f787-a45a-789c-a803-f6fd3053cf37"
+            "{{userId}}"
           ]
         }
       },
       "response": [],
       "createdAt": "2026-11-21T02:20:47.000Z",
-      "updatedAt": "2026-11-21T02:24:41.000Z",
+      "updatedAt": "2026-11-24T18:30:25.000Z",
       "uid": "60261046-92eebdf6-0678-4561-8da5-4cd604f4c718"
     },
     {
@@ -337,19 +343,19 @@
           }
         },
         "url": {
-          "raw": "{{baseURL}}/users/{{id}}",
+          "raw": "{{baseURL}}/users/{{userId}}",
           "host": [
             "{{baseURL}}"
           ],
           "path": [
             "users",
-            "{{id}}"
+            "{{userId}}"
           ]
         }
       },
       "response": [],
       "createdAt": "2026-11-21T02:25:04.000Z",
-      "updatedAt": "2026-11-21T02:59:15.000Z",
+      "updatedAt": "2026-11-24T18:29:31.000Z",
       "uid": "60261046-d1f7b524-533d-4fae-b279-670820d85abf"
     }
   ],
@@ -380,6 +386,10 @@
     },
     {
       "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userId",
       "value": ""
     }
   ]
