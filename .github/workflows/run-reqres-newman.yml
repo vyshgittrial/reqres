@@ -5,6 +5,8 @@ on:
     paths:
       - "collections/reqres.postman_collection.json"
       - ".github/workflows/run-reqres-newman.yml"
+  schedule:
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
